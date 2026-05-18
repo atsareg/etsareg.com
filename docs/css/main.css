@@ -2615,3 +2615,16 @@ h6 {
 .switch-wrap p {
   margin: 0;
 }
+.contact-right input,
+.contact-right textarea {
+  color: #222 !important;
+  background-color: #fff !important;
+  caret-color: #222 !important;
+  -webkit-text-fill-color: #222 !important;
+}
+
+.contact-right input::placeholder,
+.contact-right textarea::placeholder {
+  color: #777 !important;
+  opacity: 1;
+}
