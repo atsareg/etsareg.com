@@ -1,0 +1,284 @@
+# Project Prompt — regenerate the site from scratch
+
+You are generating a complete static photo-portfolio website. Follow this spec
+exactly; the result must match the described site file-for-file, behavior-for-behavior.
+
+## Context & identity
+
+- Owner: "Kate" (Ekaterina Tsar), photographer based in Geneva, Switzerland.
+- Single page, plain HTML/CSS/JS, NO frameworks, NO build tooling, NO external
+  JS libraries. All JS is written inside one IIFE in `js/main.js` with
+  `"use strict"` and ES5-style `var` syntax.
+- Hosted on GitHub Pages from the repo root; must work with an empty
+  `.nojekyll` file at root.
+- Photo content and copy mirror the owner's old site etsareg.photos
+  (bios, section texts, contact e-mail, Instagram, logo, ~74 photos).
+
+## Repository layout (create all of this)
+
+```
+.
+├── .gitignore                   (etsareg.com/, _site/, .DS_Store)
+├── .nojekyll                    (empty file)
+├── README.md                    (docs: layout, content pipeline, photo ops,
+│                                 Actions, customization table, troubleshooting)
+├── index.html                   (single page, described below)
+├── galleries.json               (gallery metadata, exact content below)
+├── project.prompt / this file   (spec)
+├── css/style.css
+├── js/main.js
+├── scripts/build.py             (gallery generator, spec below)
+├── .github/workflows/build.yml  (auto-rebuild on push, spec below)
+└── images/
+    ├── logo_wb_app.png          (white "Kate." logo, header)
+    ├── favicon.png              (site favicon, taken from the old site)
+    ├── me-1.jpg                 (self portrait, 3:4)
+    ├── me-2.JPG                 (tall self portrait, used in About)
+    ├── portrait/   9 jpgs: Portrait_E_B1..B3, Portrait_E_BW1..BW3, Portrait_J1..J3
+    ├── creative/   17 jpgs: creative-1..5, creative_2-1..6, creative_3-1..6
+    ├── events/     7 jpgs: event-1..7
+    ├── street/     17 jpgs: p1..p9, street-2-2..street-2-9
+    └── travel/     24 jpgs: p1..p24
+```
+
+If real photos are unavailable, generate placeholder JPGs with correct names,
+portrait/square/landscape mix, 2048 px long side.
+
+## galleries.json (exact content; order = gallery order on site)
+
+```json
+{
+  "portrait": { "title": "Portraits",
+    "sub": "Elegant & natural portraits that highlight your unique identity" },
+  "creative": { "title": "Creative Shoots",
+    "sub": "Fun, expressive images to support your creativity, social media and UGC work" },
+  "events": { "title": "Events",
+    "sub": "Warm, candid moments from your gatherings and events" },
+  "street": { "title": "Street",
+    "sub": "Fleeting moments from the life around us" },
+  "travel": { "title": "Travel",
+    "sub": "Unforgettable moments from around the world, shared with you" }
+}
+```
+
+## Design system (css/style.css)
+
+Dark, elegant, editorial. CSS custom properties on `:root`:
+`--bg #0e0f12; --surface #15171c; --surface-2 #1c1f26; --text #e8e6e1;
+--muted #9a978f; --line #2a2d35; --accent #c8a35a;`
+`--serif: "Playfair Display", Georgia, serif; --sans: "Inter", -apple-system, sans-serif;`
+`--header-h: 72px;`
+
+- Fonts via Google Fonts link: Playfair Display (400/600 + italic 400), Inter (300/400/500).
+- `html { scroll-behavior: smooth; scroll-padding-top: var(--header-h); }`
+- body: bg var(--bg), color var(--text), font var(--sans), weight 300, line-height 1.7.
+- `.container { width: min(1140px, 92%); margin-inline: auto; }`
+- Buttons `.btn` uppercase, letter-spacing .18em, 1px accent border;
+  `.btn-primary` filled accent (text #14110a) → inverts on hover; `.btn-ghost` outline → fills on hover.
+- Section paddings `clamp(4.5rem, 10vw, 8rem)`; `.section-kicker` gold uppercase .75rem
+  letter-spacing .3em; `.section-title` serif clamp(2rem, 4.5vw, 3rem).
+- `@media (prefers-reduced-motion: reduce)`: kill html smooth scroll, reveal & gallery transitions.
+- Responsive breakpoints: 900px (about & contact grids → 1 col; gallery 3 columns),
+  620px (hamburger nav; gallery 2 columns; services list 1 col).
+
+## Page structure & exact copy (index.html)
+
+`<html lang="en">` — title `Kate. Geneva Photography`; meta description:
+`Kate is a Geneva-based photographer for portraits, creative projects, events, street and travel — atmospheric visual storytelling with a soft cinematic look.`;
+og:title/og:description/og:type + og:image (`images/me-1.jpg`);
+`<link rel="icon" type="image/png" href="images/favicon.png">`;
+Google-Fonts preconnect + stylesheet; `css/style.css`.
+
+1. **Header** `.site-header#siteHeader` (fixed, transparent → `.scrolled` gets
+   rgba(14,15,18,.92) + backdrop blur + bottom line): container flex
+   `.header-inner`; `.brand` = `<img class="brand-logo" src="images/logo_wb_app.png" alt="Kate — Geneva Photography">`
+   (height 36px) linking `#home`; `.site-nav#siteNav` links Home/About/Galleries/Contact
+   (muted → accent on hover, uppercase .85rem, letter-spacing .12em);
+   `.nav-toggle#navToggle` hamburger (3 spans, X-transform on `.open`), aria-expanded.
+
+2. **Hero** `.hero#home`: `min-height: 100svh`, centered text, `overflow: hidden`.
+   - `.hero-slides` = absolute inset-0 flex strip, `will-change: transform`, NO CSS
+     transition on it (movement is JS-animated). Children `.hero-slide`
+     `flex: 0 0 100%` (position relative) each containing full-cover `<img>`
+     (`object-fit: cover`), followed by a clone slide with `data-clone` (no
+     data-gallery, empty alt).
+   - Inside the strip, wrap the slides with markers:
+     `<!-- HERO-SLIDES:START -->` … `<!-- HERO-SLIDES:END -->`
+   - `.hero-overlay`: `linear-gradient(180deg, rgba(14,15,18,.55), rgba(14,15,18,.35) 45%, rgba(14,15,18,.85))`.
+   - `.hero-content` (relative): kicker "Geneva-based photographer";
+     `<h1 class="hero-title">Kate</h1>` serif clamp(3rem, 9vw, 6.5rem);
+     subtitle italic serif "Portraits, events and quiet moments of beauty.";
+     `.btn.btn-primary` → `#galleries` "View Galleries".
+   - `.scroll-cue`: centered bottom, 1px × 52px gold gradient line, keyframe
+     `cue` scaleY in/out loop 2s, links to `#about`.
+    - `.slide-name#slideName`: caption block styled after the original
+      bootstrap carousel-caption: absolute, left 15%, right 15%, bottom 85px,
+      text-align right, white text, `text-shadow 0 1px 12px rgba(0,0,0,.55)`,
+      no background/border, `transition: opacity .6s`):
+      `<span class="slide-name-label">` (sans, uppercase, weight 500,
+      letter-spacing 3px, clamp(1rem,2.2vw,1.35rem), margin-bottom 1rem) +
+      `<span class="slide-name-teaser">` (plain, 1rem, #fff).
+      On ≤620px: left 5%, bottom 5rem, teaser .85rem.
+      Initial content = first gallery's title + sub.
+
+3. **About** `.about#about` (bg --surface): `.about-grid` 2-col grid
+   `minmax(0,.9fr) minmax(0,1.1fr)`, gap clamp(2rem,6vw,5rem). Left
+   `.about-photo` img `images/me-2.JPG` alt "Portrait of Kate, photographer",
+   `aspect-ratio: 3/4; object-fit: cover; object-position: center 20%`. Right
+   `.about-text`: kicker "About me"; `<h2>` "Geneva-based photographer for portraits,
+   events and atmospheric visual storytelling"; paragraph "I look for people,
+   places and fleeting moments, capturing beauty all the while aiming for a soft
+   cinematic look."; paragraph "Feel free to contact me to see what we can do
+   together!"; `<ul class="about-services">` 2-col list with em-dash gold
+   ::before markers: "Portraits — elegant & natural", "Creative projects & UGC
+   work", "Events & gatherings", "Street & travel photography"; `.btn.btn-ghost`
+   → `#contact` "Work with me".
+
+4. **Galleries** `.galleries#galleries`: kicker "Selected work" + title
+   "Galleries" (both `.center`).
+   - `.filters` (role=group, aria-label): `<!-- FILTERS:START -->` buttons
+     `.filter-btn` — `All` (`.is-active`, data-filter="all") + one per gallery
+     (data-filter = folder name, label = title) `<!-- FILTERS:END -->`;
+     underline-on-active style, no border/bg otherwise.
+   - `<!-- GALLERIES:START -->` per gallery a `.gallery-group[data-group]`:
+     `.group-head` with `<h3 class="group-title">` (serif clamp(1.5rem,3vw,2rem),
+     gold 2.6rem underline via ::after) + `<p class="group-sub">` (italic serif
+     muted); then `.gallery-grid` of `<figure class="gallery-item reveal"
+     data-category tabindex="0">` — full-size `<img loading="lazy">`
+     (alt `"<Title> photograph NN"`), `<figcaption><Title NN><span><Title></span></figcaption>`.
+     `<!-- GALLERIES:END -->`
+   - **Masonry**: `.gallery-grid { columns: 4; column-gap: 1.2rem; }`;
+     `.gallery-item { break-inside: avoid; margin-bottom: 1.2rem; overflow: hidden;
+     cursor: zoom-in; background: var(--surface-2); position: relative; }`;
+     `.gallery-item img { width: 100%; height: auto; transition: transform .5s; }`
+     (photos keep native proportions — NO fixed aspect ratios, NO gaps).
+     Column counts: 4 at >900px, 3 at ≤900px, 2 at ≤620px.
+     Hover/focus: `transform: scale(1.05)` on img; figcaption overlay
+     (gradient bottom, serif title + gold uppercase span) fades/slides in.
+     `.hide { display: none; }` for both items and groups.
+   - `.reveal`: opacity 0 / translateY(24px), `.visible` resets, .7s ease.
+
+5. **Contact** `.contact#contact` (bg --surface): `.contact-grid` 2 cols.
+   Left: kicker "Get in touch"; title "Let's create something together";
+   "Available for commissions and collaborations in Geneva, all of Switzerland
+   and on travel."; `.contact-list` (Email → `mailto:photos@etsareg.com?subject=Photography%20inquiry`,
+   Based in → Geneva, Switzerland; bordered rows, 90px uppercase muted labels);
+   `.socials`: one link "Instagram · @etsareg.photos" →
+   `https://www.instagram.com/etsareg.photos` target=_blank rel=noopener.
+   Right: `.contact-form#contactForm` — labels uppercase .75rem muted; inputs/textarea
+   bg --bg, 1px border var(--line), accent on focus, no outline; fields Name (text),
+   Email (email), Message (textarea rows=5), all required with placeholders
+   ("Your name", "you@example.com", "Tell me about your project…");
+   submit `.btn.btn-primary` "Send message"; `.form-note` small muted:
+   "This opens your email app with the message pre-filled. See README to use a form service instead."
+
+6. **Footer**: border-top var(--line); `.footer-inner` flex space-between wrap:
+   `© <span id="year"></span> Kate · Geneva Photography · All rights reserved` +
+   `back-top` link ↑ to #home.
+
+7. **Lightbox** `.lightbox#lightbox` (role=dialog aria-modal, `hidden` attr,
+   fixed inset 0, z-index 200, bg rgba(8,8,10,.94), flex center, `[hidden]{display:none}`):
+   close × (top-right absolute), prev ‹ / next › big ghost buttons (2.4rem,
+   opacity .7 → 1 & accent hover), `<figure class="lb-body">` max-width min(1000px,100%)
+   with `<img id="lbImg">` (`max-height: 82vh; object-fit: contain`) and
+   `.lb-caption` flex-between: `<span id="lbTitle">` serif + `<span id="lbCounter">`
+   muted small uppercase; `body.no-scroll { overflow: hidden }` while open.
+
+8. `<script src="js/main.js">` at end of body.
+
+## Behaviour (js/main.js — single IIFE, ES5 style)
+
+1. Sticky header: toggle `.scrolled` when scrollY > 40 (passive listener).
+2. Footer year via `#year`.
+3. Mobile nav: toggle `.open` on `#siteNav` + `#navToggle` + aria-expanded;
+   close when a nav link is clicked.
+4. Filters: on click set `.is-active`; toggle each `.gallery-group`
+   `.hide` when `data-filter != all && data-group != filter`; same for items
+   by `data-category`. (Group titles/filters are generated, nothing hardcoded.)
+5. Reveal on scroll: IntersectionObserver threshold 0.12, add `.visible`,
+   unobserve; fallback add visible immediately if no IO.
+6. Lightbox: open on click or Enter/Space of item; operate on
+   `visibleItems()` (items without `.hide`) so it navigates within the active
+   filter; render() sets src/alt, title = figcaption firstChild, counter
+   `"n / total"`; prev/next wrap with modulo; Escape closes; ←/→ navigate;
+   click backdrop (target == lightbox) closes; body `.no-scroll`; restore
+   focus to the tile on close.
+7. Contact form submit: preventDefault, build
+   `mailto:photos@etsareg.com?subject=Photography inquiry — <name>&body=<message>\n\n— <name>\n<email>`
+   (encodeURIComponent).
+8. **Hero slideshow** (must be frame-animated; no CSS transitions on the strip):
+   - Collect `.hero-slide` elements (one per gallery + clone of first).
+   - On load: for every slide with `data-gallery`, replace its img src with a
+     **randomly chosen photo from the matching gallery** (pool = grid items
+     whose `data-category` equals the slide's gallery); the `data-clone` slide
+     copies slide 0's src (keeps loop seamless); then set chip label/teaser
+     from slide 0's data-name/data-teaser.
+   - Every **20 000 ms**, if not animating, slide the strip LEFT by one slide:
+     rAF loop, duration **1600 ms**, easing `easeInOutCubic`
+     (`t<.5 ? 4t³ : 1-(-2t+2)³/2`), applying
+     `translate3d(-(from + (to-from)*ease(p))*100%, 0, 0)`; at completion, if
+     the target was the clone index, instantly reset position to 0 and logical
+     index 0 (never animate rightwards).
+   - Chip cross-fade: opacity 0 immediately, swap texts after 700 ms, opacity 1.
+   - Rotation must run even when prefers-reduced-motion is set (CSS simply
+     keeps transitions off); do NOT gate the interval on matchMedia.
+
+## scripts/build.py — generator (Python ≥3.8, stdlib only)
+
+- Scans `images/*` subfolders containing ≥1 photo (`.jpg .jpeg .png .webp
+  .avif`, hidden files ignored). Gallery id = folder name.
+- Order & presentation from `galleries.json`; listed folders first in file
+  order (only existing ones), unlisted folders appended alphabetically;
+  missing config → title = folder name capitalized, empty sub (omit `.group-sub`
+  line if empty).
+- Photos sorted by natural key (digit groups as integers, then suffix).
+- Generates three HTML fragments and replaces the content between
+  `<!-- HERO-SLIDES:START/END -->`, `<!-- FILTERS:START/END -->`,
+  `<!-- GALLERIES:START/END -->` in `index.html` (marker lines preserved):
+  hero slides (data-name/data-gallery/data-teaser, first photo as static src,
+  plus clone of first gallery with `data-clone` and `alt=""`), filter buttons
+  (`All` first with `is-active`), and the gallery groups exactly matching the
+  markup rules above (tile caption `"<Title> NN"`, span sub-label = Title,
+  alt `"<Title> photograph NN"`, 8-space/10-space indentation).
+- Escapes `& < >` in text and `"` in attributes.
+- Idempotent: writes only when changed; prints report (`<folder> <n> photos "<title>"` + TOTAL).
+- Exits with error message (non-zero) if markers missing, images/ missing, or
+  no galleries found — never writes a broken file.
+- Run manually: `python3 scripts/build.py`.
+
+## .github/workflows/build.yml
+
+- `name: Rebuild galleries & deploy to GitHub Pages`;
+  `on: push: branches [main]` + `workflow_dispatch`;
+  `permissions: contents: write, pages: write, id-token: write`;
+  `concurrency: group pages, cancel-in-progress false`.
+- Job `build`: checkout@v4 → setup-python@v5 (3.12) → `python3 scripts/build.py`
+  → if `git status --porcelain index.html` non-empty: configure
+  `github-actions[bot]` / `41898282+github-actions[bot]@users.noreply.github.com`,
+  commit `-m "Update galleries from images/ [skip ci]"`, push →
+  assemble `_site/` (copy `index.html galleries.json css/ js/ images/ .nojekyll`)
+  → `actions/configure-pages@v5` → `actions/upload-pages-artifact@v3` with `path: _site`.
+- Job `deploy` (needs build): `environment github-pages`,
+  `actions/deploy-pages@v4`, expose `${{ steps.deployment.outputs.page_url }}`.
+- GitHub Pages settings must be **Source: GitHub Actions**.
+
+## README.md
+
+Must document: repo layout; generated-vs-hand-written regions + marker list;
+the "folder = gallery" rule; galleries.json semantics & ordering; day-to-day
+add/remove/rename recipes; how the Action works and debugging when it doesn't;
+local preview + rebuild commands; customization table (hero text, about, email
+in TWO places, Instagram, logo, colors, slideshow 20 s / 1600 ms); contact-form
+Formspree migration; custom domain (CNAME `etsareg.photos`); troubleshooting
+table; ~60 MB photos → push via git not web UI.
+
+## Acceptance checklist
+
+- `python3 -m http.server` + curl: `/` and every referenced asset return 200.
+- `index.html` parses balanced; 5 generated groups; 74 tiles; 6 hero slides; 6 filter buttons.
+- `build.py` run twice → second says "up to date"; dropping a new folder
+  `images/weddings/` + photos then rebuilding adds filter "Weddings", group, hero slide.
+- Hero: strip slides left every 20 s with eased ~1.6 s motion, Travel→Events
+  wraps seamlessly, chip updates name + teaser with fade.
+- Filters collapse to a single titled group; lightbox arrows cycle only the
+  visible set, Esc/focus-return work.
