@@ -1,0 +1,22 @@
+{
+  "portrait": {
+    "title": "Portraits",
+    "sub": "Elegant & natural portraits that highlight your unique identity"
+  },
+  "creative": {
+    "title": "Creative Shoots",
+    "sub": "Fun, expressive images to support your creativity, social media and UGC work"
+  },
+  "events": {
+    "title": "Events",
+    "sub": "Warm, candid moments from your gatherings and events"
+  },
+  "street": {
+    "title": "Street",
+    "sub": "Fleeting moments from the life around us"
+  },
+  "travel": {
+    "title": "Travel",
+    "sub": "Unforgettable moments from around the world, shared with you"
+  }
+}

@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kate. Geneva Photography</title>
+  <meta name="description" content="Kate is a Geneva-based photographer for portraits, creative projects, events, street and travel — atmospheric visual storytelling with a soft cinematic look.">
+  <meta property="og:title" content="Kate — Geneva Photography">
+  <meta property="og:description" content="Portraits, events and quiet moments of beauty. Geneva-based photographer for atmospheric visual storytelling.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="images/me-1.jpg">
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      <a href="#home" class="brand"><img class="brand-logo" src="images/logo_wb_app.png" alt="Kate — Geneva Photography"></a>
+      <nav class="site-nav" id="siteNav" aria-label="Main navigation">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#galleries">Galleries</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero" id="home">
+      <div class="hero-slides">
+        <!-- HERO-SLIDES:START -->
+        <div class="hero-slide" data-name="Portraits" data-gallery="portrait" data-teaser="Elegant &amp; natural portraits that highlight your unique identity"><img src="images/portrait/Portrait_E_B1.jpg" alt="Portraits photograph"></div>
+        <div class="hero-slide" data-name="Creative Shoots" data-gallery="creative" data-teaser="Fun, expressive images to support your creativity, social media and UGC work"><img src="images/creative/creative-1.jpg" alt="Creative Shoots photograph"></div>
+        <div class="hero-slide" data-name="Events" data-gallery="events" data-teaser="Warm, candid moments from your gatherings and events"><img src="images/events/event-1.jpg" alt="Events photograph"></div>
+        <div class="hero-slide" data-name="Street" data-gallery="street" data-teaser="Fleeting moments from the life around us"><img src="images/street/p1.jpg" alt="Street photograph"></div>
+        <div class="hero-slide" data-name="Travel" data-gallery="travel" data-teaser="Unforgettable moments from around the world, shared with you"><img src="images/travel/p1.jpg" alt="Travel photograph"></div>
+        <div class="hero-slide" data-name="Portraits" data-teaser="Elegant &amp; natural portraits that highlight your unique identity" data-clone><img src="images/portrait/Portrait_E_B1.jpg" alt=""></div>
+        <!-- HERO-SLIDES:END -->
+      </div>
+      <div class="hero-overlay"></div>
+      <p class="slide-name" id="slideName">
+        <span class="slide-name-label">Events</span>
+        <span class="slide-name-teaser">Warm, candid moments from your gatherings and events</span>
+      </p>
+      <div class="hero-content container">
+        <p class="hero-kicker">Geneva-based photographer</p>
+        <h1 class="hero-title">Kate</h1>
+        <p class="hero-subtitle">Portraits, events and quiet moments of beauty.</p>
+        <a class="btn btn-primary" href="#galleries">View Galleries</a>
+      </div>
+      <a class="scroll-cue" href="#about" aria-label="Scroll down"><span></span></a>
+    </section>
+
+    <!-- About -->
+    <section class="about" id="about">
+      <div class="container about-grid">
+        <div class="about-photo reveal">
+          <img src="images/me-2.JPG" alt="Portrait of Kate, photographer" loading="lazy">
+        </div>
+        <div class="about-text reveal">
+          <p class="section-kicker">About me</p>
+          <h2 class="section-title">Geneva-based photographer for portraits, events and atmospheric visual storytelling</h2>
+          <p>
+            I look for people, places and fleeting moments, capturing beauty all
+            the while aiming for a soft cinematic look.
+          </p>
+          <p>
+            Feel free to contact me to see what we can do together!
+          </p>
+          <ul class="about-services">
+            <li>Portraits — elegant &amp; natural</li>
+            <li>Creative projects &amp; UGC work</li>
+            <li>Events &amp; gatherings</li>
+            <li>Street &amp; travel photography</li>
+          </ul>
+          <a class="btn btn-ghost" href="#contact">Work with me</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Galleries -->
+    <section class="galleries" id="galleries">
+      <div class="container">
+        <p class="section-kicker center">Selected work</p>
+        <h2 class="section-title center">Galleries</h2>
+
+        <div class="filters" role="group" aria-label="Filter gallery by category">
+          <!-- FILTERS:START -->
+          <button class="filter-btn is-active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="portrait">Portraits</button>
+          <button class="filter-btn" data-filter="creative">Creative Shoots</button>
+          <button class="filter-btn" data-filter="events">Events</button>
+          <button class="filter-btn" data-filter="street">Street</button>
+          <button class="filter-btn" data-filter="travel">Travel</button>
+          <!-- FILTERS:END -->
+        </div>
+
+        <!-- GALLERIES:START -->
+        <div class="gallery-group" data-group="portrait">
+          <div class="group-head">
+            <h3 class="group-title">Portraits</h3>
+            <p class="group-sub">Elegant &amp; natural portraits that highlight your unique identity</p>
+          </div>
+          <div class="gallery-grid">
+          <figure class="gallery-item reveal" data-category="portrait" tabindex="0">
+            <img src="images/portrait/Portrait_E_B1.jpg" alt="Portraits photograph 01" loading="lazy">
+            <figcaption>Portraits 01<span>Portraits</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="portrait" tabindex="0">
+            <img src="images/portrait/Portrait_E_B2.jpg" alt="Portraits photograph 02" loading="lazy">
+            <figcaption>Portraits 02<span>Portraits</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="portrait" tabindex="0">
+            <img src="images/portrait/Portrait_E_B3.jpg" alt="Portraits photograph 03" loading="lazy">
+            <figcaption>Portraits 03<span>Portraits</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="portrait" tabindex="0">
+            <img src="images/portrait/Portrait_E_BW1.jpg" alt="Portraits photograph 04" loading="lazy">
+            <figcaption>Portraits 04<span>Portraits</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="portrait" tabindex="0">
+            <img src="images/portrait/Portrait_E_BW2.jpg" alt="Portraits photograph 05" loading="lazy">
+            <figcaption>Portraits 05<span>Portraits</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="portrait" tabindex="0">
+            <img src="images/portrait/Portrait_E_BW3.jpg" alt="Portraits photograph 06" loading="lazy">
+            <figcaption>Portraits 06<span>Portraits</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="portrait" tabindex="0">
+            <img src="images/portrait/Portrait_J1.jpg" alt="Portraits photograph 07" loading="lazy">
+            <figcaption>Portraits 07<span>Portraits</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="portrait" tabindex="0">
+            <img src="images/portrait/Portrait_J2.jpg" alt="Portraits photograph 08" loading="lazy">
+            <figcaption>Portraits 08<span>Portraits</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="portrait" tabindex="0">
+            <img src="images/portrait/Portrait_J3.jpg" alt="Portraits photograph 09" loading="lazy">
+            <figcaption>Portraits 09<span>Portraits</span></figcaption>
+          </figure>
+          </div>
+        </div>
+
+        <div class="gallery-group" data-group="creative">
+          <div class="group-head">
+            <h3 class="group-title">Creative Shoots</h3>
+            <p class="group-sub">Fun, expressive images to support your creativity, social media and UGC work</p>
+          </div>
+          <div class="gallery-grid">
+          <figure class="gallery-item reveal" data-category="creative" tabindex="0">
+            <img src="images/creative/creative-1.jpg" alt="Creative Shoots photograph 01" loading="lazy">
+            <figcaption>Creative Shoots 01<span>Creative Shoots</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="creative" tabindex="0">
+            <img src="images/creative/creative-2.jpg" alt="Creative Shoots photograph 02" loading="lazy">
+            <figcaption>Creative Shoots 02<span>Creative Shoots</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="creative" tabindex="0">
+            <img src="images/creative/creative-3.jpg" alt="Creative Shoots photograph 03" loading="lazy">
+            <figcaption>Creative Shoots 03<span>Creative Shoots</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="creative" tabindex="0">
+            <img src="images/creative/creative-4.jpg" alt="Creative Shoots photograph 04" loading="lazy">
+            <figcaption>Creative Shoots 04<span>Creative Shoots</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="creative" tabindex="0">
+            <img src="images/creative/creative-5.jpg" alt="Creative Shoots photograph 05" loading="lazy">
+            <figcaption>Creative Shoots 05<span>Creative Shoots</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="creative" tabindex="0">
+            <img src="images/creative/creative_2-1.jpg" alt="Creative Shoots photograph 06" loading="lazy">
+            <figcaption>Creative Shoots 06<span>Creative Shoots</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="creative" tabindex="0">
+            <img src="images/creative/creative_2-2.jpg" alt="Creative Shoots photograph 07" loading="lazy">
+            <figcaption>Creative Shoots 07<span>Creative Shoots</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="creative" tabindex="0">
+            <img src="images/creative/creative_2-3.jpg" alt="Creative Shoots photograph 08" loading="lazy">
+            <figcaption>Creative Shoots 08<span>Creative Shoots</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="creative" tabindex="0">
+            <img src="images/creative/creative_2-4.jpg" alt="Creative Shoots photograph 09" loading="lazy">
+            <figcaption>Creative Shoots 09<span>Creative Shoots</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="creative" tabindex="0">
+            <img src="images/creative/creative_2-5.jpg" alt="Creative Shoots photograph 10" loading="lazy">
+            <figcaption>Creative Shoots 10<span>Creative Shoots</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="creative" tabindex="0">
+            <img src="images/creative/creative_2-6.jpg" alt="Creative Shoots photograph 11" loading="lazy">
+            <figcaption>Creative Shoots 11<span>Creative Shoots</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="creative" tabindex="0">
+            <img src="images/creative/creative_3-1.jpg" alt="Creative Shoots photograph 12" loading="lazy">
+            <figcaption>Creative Shoots 12<span>Creative Shoots</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="creative" tabindex="0">
+            <img src="images/creative/creative_3-2.jpg" alt="Creative Shoots photograph 13" loading="lazy">
+            <figcaption>Creative Shoots 13<span>Creative Shoots</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="creative" tabindex="0">
+            <img src="images/creative/creative_3-3.jpg" alt="Creative Shoots photograph 14" loading="lazy">
+            <figcaption>Creative Shoots 14<span>Creative Shoots</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="creative" tabindex="0">
+            <img src="images/creative/creative_3-4.jpg" alt="Creative Shoots photograph 15" loading="lazy">
+            <figcaption>Creative Shoots 15<span>Creative Shoots</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="creative" tabindex="0">
+            <img src="images/creative/creative_3-5.jpg" alt="Creative Shoots photograph 16" loading="lazy">
+            <figcaption>Creative Shoots 16<span>Creative Shoots</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="creative" tabindex="0">
+            <img src="images/creative/creative_3-6.jpg" alt="Creative Shoots photograph 17" loading="lazy">
+            <figcaption>Creative Shoots 17<span>Creative Shoots</span></figcaption>
+          </figure>
+          </div>
+        </div>
+
+        <div class="gallery-group" data-group="events">
+          <div class="group-head">
+            <h3 class="group-title">Events</h3>
+            <p class="group-sub">Warm, candid moments from your gatherings and events</p>
+          </div>
+          <div class="gallery-grid">
+          <figure class="gallery-item reveal" data-category="events" tabindex="0">
+            <img src="images/events/event-1.jpg" alt="Events photograph 01" loading="lazy">
+            <figcaption>Events 01<span>Events</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="events" tabindex="0">
+            <img src="images/events/event-2.jpg" alt="Events photograph 02" loading="lazy">
+            <figcaption>Events 02<span>Events</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="events" tabindex="0">
+            <img src="images/events/event-3.jpg" alt="Events photograph 03" loading="lazy">
+            <figcaption>Events 03<span>Events</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="events" tabindex="0">
+            <img src="images/events/event-4.jpg" alt="Events photograph 04" loading="lazy">
+            <figcaption>Events 04<span>Events</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="events" tabindex="0">
+            <img src="images/events/event-5.jpg" alt="Events photograph 05" loading="lazy">
+            <figcaption>Events 05<span>Events</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="events" tabindex="0">
+            <img src="images/events/event-6.jpg" alt="Events photograph 06" loading="lazy">
+            <figcaption>Events 06<span>Events</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="events" tabindex="0">
+            <img src="images/events/event-7.jpg" alt="Events photograph 07" loading="lazy">
+            <figcaption>Events 07<span>Events</span></figcaption>
+          </figure>
+          </div>
+        </div>
+
+        <div class="gallery-group" data-group="street">
+          <div class="group-head">
+            <h3 class="group-title">Street</h3>
+            <p class="group-sub">Fleeting moments from the life around us</p>
+          </div>
+          <div class="gallery-grid">
+          <figure class="gallery-item reveal" data-category="street" tabindex="0">
+            <img src="images/street/p1.jpg" alt="Street photograph 01" loading="lazy">
+            <figcaption>Street 01<span>Street</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="street" tabindex="0">
+            <img src="images/street/p2.jpg" alt="Street photograph 02" loading="lazy">
+            <figcaption>Street 02<span>Street</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="street" tabindex="0">
+            <img src="images/street/p3.jpg" alt="Street photograph 03" loading="lazy">
+            <figcaption>Street 03<span>Street</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="street" tabindex="0">
+            <img src="images/street/p4.jpg" alt="Street photograph 04" loading="lazy">
+            <figcaption>Street 04<span>Street</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="street" tabindex="0">
+            <img src="images/street/p5.jpg" alt="Street photograph 05" loading="lazy">
+            <figcaption>Street 05<span>Street</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="street" tabindex="0">
+            <img src="images/street/p6.jpg" alt="Street photograph 06" loading="lazy">
+            <figcaption>Street 06<span>Street</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="street" tabindex="0">
+            <img src="images/street/p7.jpg" alt="Street photograph 07" loading="lazy">
+            <figcaption>Street 07<span>Street</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="street" tabindex="0">
+            <img src="images/street/p8.jpg" alt="Street photograph 08" loading="lazy">
+            <figcaption>Street 08<span>Street</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="street" tabindex="0">
+            <img src="images/street/p9.jpg" alt="Street photograph 09" loading="lazy">
+            <figcaption>Street 09<span>Street</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="street" tabindex="0">
+            <img src="images/street/street-2-2.jpg" alt="Street photograph 10" loading="lazy">
+            <figcaption>Street 10<span>Street</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="street" tabindex="0">
+            <img src="images/street/street-2-3.jpg" alt="Street photograph 11" loading="lazy">
+            <figcaption>Street 11<span>Street</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="street" tabindex="0">
+            <img src="images/street/street-2-4.jpg" alt="Street photograph 12" loading="lazy">
+            <figcaption>Street 12<span>Street</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="street" tabindex="0">
+            <img src="images/street/street-2-5.jpg" alt="Street photograph 13" loading="lazy">
+            <figcaption>Street 13<span>Street</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="street" tabindex="0">
+            <img src="images/street/street-2-6.jpg" alt="Street photograph 14" loading="lazy">
+            <figcaption>Street 14<span>Street</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="street" tabindex="0">
+            <img src="images/street/street-2-7.jpg" alt="Street photograph 15" loading="lazy">
+            <figcaption>Street 15<span>Street</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="street" tabindex="0">
+            <img src="images/street/street-2-8.jpg" alt="Street photograph 16" loading="lazy">
+            <figcaption>Street 16<span>Street</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="street" tabindex="0">
+            <img src="images/street/street-2-9.jpg" alt="Street photograph 17" loading="lazy">
+            <figcaption>Street 17<span>Street</span></figcaption>
+          </figure>
+          </div>
+        </div>
+
+        <div class="gallery-group" data-group="travel">
+          <div class="group-head">
+            <h3 class="group-title">Travel</h3>
+            <p class="group-sub">Unforgettable moments from around the world, shared with you</p>
+          </div>
+          <div class="gallery-grid">
+          <figure class="gallery-item reveal" data-category="travel" tabindex="0">
+            <img src="images/travel/p1.jpg" alt="Travel photograph 01" loading="lazy">
+            <figcaption>Travel 01<span>Travel</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="travel" tabindex="0">
+            <img src="images/travel/p2.jpg" alt="Travel photograph 02" loading="lazy">
+            <figcaption>Travel 02<span>Travel</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="travel" tabindex="0">
+            <img src="images/travel/p3.jpg" alt="Travel photograph 03" loading="lazy">
+            <figcaption>Travel 03<span>Travel</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="travel" tabindex="0">
+            <img src="images/travel/p4.jpg" alt="Travel photograph 04" loading="lazy">
+            <figcaption>Travel 04<span>Travel</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="travel" tabindex="0">
+            <img src="images/travel/p5.jpg" alt="Travel photograph 05" loading="lazy">
+            <figcaption>Travel 05<span>Travel</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="travel" tabindex="0">
+            <img src="images/travel/p6.jpg" alt="Travel photograph 06" loading="lazy">
+            <figcaption>Travel 06<span>Travel</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="travel" tabindex="0">
+            <img src="images/travel/p7.jpg" alt="Travel photograph 07" loading="lazy">
+            <figcaption>Travel 07<span>Travel</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="travel" tabindex="0">
+            <img src="images/travel/p8.jpg" alt="Travel photograph 08" loading="lazy">
+            <figcaption>Travel 08<span>Travel</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="travel" tabindex="0">
+            <img src="images/travel/p9.jpg" alt="Travel photograph 09" loading="lazy">
+            <figcaption>Travel 09<span>Travel</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="travel" tabindex="0">
+            <img src="images/travel/p10.jpg" alt="Travel photograph 10" loading="lazy">
+            <figcaption>Travel 10<span>Travel</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="travel" tabindex="0">
+            <img src="images/travel/p11.jpg" alt="Travel photograph 11" loading="lazy">
+            <figcaption>Travel 11<span>Travel</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="travel" tabindex="0">
+            <img src="images/travel/p12.jpg" alt="Travel photograph 12" loading="lazy">
+            <figcaption>Travel 12<span>Travel</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="travel" tabindex="0">
+            <img src="images/travel/p13.jpg" alt="Travel photograph 13" loading="lazy">
+            <figcaption>Travel 13<span>Travel</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="travel" tabindex="0">
+            <img src="images/travel/p14.jpg" alt="Travel photograph 14" loading="lazy">
+            <figcaption>Travel 14<span>Travel</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="travel" tabindex="0">
+            <img src="images/travel/p15.jpg" alt="Travel photograph 15" loading="lazy">
+            <figcaption>Travel 15<span>Travel</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="travel" tabindex="0">
+            <img src="images/travel/p16.jpg" alt="Travel photograph 16" loading="lazy">
+            <figcaption>Travel 16<span>Travel</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="travel" tabindex="0">
+            <img src="images/travel/p17.jpg" alt="Travel photograph 17" loading="lazy">
+            <figcaption>Travel 17<span>Travel</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="travel" tabindex="0">
+            <img src="images/travel/p18.jpg" alt="Travel photograph 18" loading="lazy">
+            <figcaption>Travel 18<span>Travel</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="travel" tabindex="0">
+            <img src="images/travel/p19.jpg" alt="Travel photograph 19" loading="lazy">
+            <figcaption>Travel 19<span>Travel</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="travel" tabindex="0">
+            <img src="images/travel/p20.jpg" alt="Travel photograph 20" loading="lazy">
+            <figcaption>Travel 20<span>Travel</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="travel" tabindex="0">
+            <img src="images/travel/p21.jpg" alt="Travel photograph 21" loading="lazy">
+            <figcaption>Travel 21<span>Travel</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="travel" tabindex="0">
+            <img src="images/travel/p22.jpg" alt="Travel photograph 22" loading="lazy">
+            <figcaption>Travel 22<span>Travel</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="travel" tabindex="0">
+            <img src="images/travel/p23.jpg" alt="Travel photograph 23" loading="lazy">
+            <figcaption>Travel 23<span>Travel</span></figcaption>
+          </figure>
+          <figure class="gallery-item reveal" data-category="travel" tabindex="0">
+            <img src="images/travel/p24.jpg" alt="Travel photograph 24" loading="lazy">
+            <figcaption>Travel 24<span>Travel</span></figcaption>
+          </figure>
+          </div>
+        </div>
+        <!-- GALLERIES:END -->
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact" id="contact">
+      <div class="container contact-grid">
+        <div class="contact-info reveal">
+          <p class="section-kicker">Get in touch</p>
+          <h2 class="section-title">Let's create something together</h2>
+          <p>Available for commissions and collaborations in Geneva, all of Switzerland and on travel.</p>
+          <ul class="contact-list">
+            <li><span>Email</span><a href="mailto:photos@etsareg.com?subject=Photography%20inquiry">photos@etsareg.com</a></li>
+            <li><span>Based in</span>Geneva, Switzerland</li>
+          </ul>
+          <div class="socials">
+            <a href="https://www.instagram.com/etsareg.photos" target="_blank" rel="noopener" aria-label="Instagram">Instagram · @etsareg.photos</a>
+          </div>
+        </div>
+        <form class="contact-form reveal" id="contactForm">
+          <label>
+            Name
+            <input type="text" name="name" required placeholder="Your name">
+          </label>
+          <label>
+            Email
+            <input type="email" name="email" required placeholder="you@example.com">
+          </label>
+          <label>
+            Message
+            <textarea name="message" rows="5" required placeholder="Tell me about your project…"></textarea>
+          </label>
+          <button type="submit" class="btn btn-primary">Send message</button>
+          <p class="form-note">This opens your email app with the message pre-filled. See README to use a form service instead.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> Kate · Geneva Photography · All rights reserved</p>
+      <a href="#home" class="back-top">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" hidden>
+    <button class="lb-btn lb-close" id="lbClose" aria-label="Close">×</button>
+    <button class="lb-btn lb-prev" id="lbPrev" aria-label="Previous image">‹</button>
+    <figure class="lb-body">
+      <img id="lbImg" src="" alt="">
+      <figcaption class="lb-caption"><span id="lbTitle"></span><span id="lbCounter"></span></figcaption>
+    </figure>
+    <button class="lb-btn lb-next" id="lbNext" aria-label="Next image">›</button>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
