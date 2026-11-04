@@ -165,12 +165,16 @@ Google-Fonts preconnect + stylesheet; `css/style.css`.
    Based in → Geneva, Switzerland; bordered rows, 90px uppercase muted labels);
    `.socials`: one link "Instagram · @etsareg.photos" →
    `https://www.instagram.com/etsareg.photos` target=_blank rel=noopener.
-   Right: `.contact-form#contactForm` — labels uppercase .75rem muted; inputs/textarea
+   Right: `.contact-form#contactForm` with
+   `action="https://api.web3forms.com/submit" method="POST"` and hidden fields
+   `access_key` (value `0e54d6af-dec1-4b34-b4c0-fec78965e813`), `subject`
+   ("New enquiry from the website"), and honeypot checkbox `botcheck`
+   (tabindex=-1, display:none) — labels uppercase .75rem muted; inputs/textarea
    bg --bg, 1px border var(--line), accent on focus, no outline; fields Name (text),
    Email (email), Message (textarea rows=5), all required with placeholders
    ("Your name", "you@example.com", "Tell me about your project…");
-   submit `.btn.btn-primary` "Send message"; `.form-note` small muted:
-   "This opens your email app with the message pre-filled. See README to use a form service instead."
+   submit `.btn.btn-primary` "Send message"; `<p class="form-note" id="formNote">`
+   small muted: "Your message is sent straight to my inbox."
 
 6. **Footer**: border-top var(--line); `.footer-inner` flex space-between wrap:
    `© <span id="year"></span> Kate · Geneva Photography · All rights reserved` +
@@ -203,9 +207,11 @@ Google-Fonts preconnect + stylesheet; `css/style.css`.
    `"n / total"`; prev/next wrap with modulo; Escape closes; ←/→ navigate;
    click backdrop (target == lightbox) closes; body `.no-scroll`; restore
    focus to the tile on close.
-7. Contact form submit: preventDefault, build
-   `mailto:photos@etsareg.com?subject=Photography inquiry — <name>&body=<message>\n\n— <name>\n<email>`
-   (encodeURIComponent).
+7. Contact form submit: preventDefault; disable button; `fetch(form.action,
+   POST, Accept: application/json, body FormData)`; on `json.success` reset the
+   form and set `#formNote` to "Thank you! Your message has been sent." with
+   class `sent` (accent color); otherwise/network-fail show a fallback note
+   pointing to photos@etsareg.com; re-enable button.
 8. **Hero slideshow** (must be frame-animated; no CSS transitions on the strip):
    - Collect `.hero-slide` elements (one per gallery + clone of first).
    - On load: for every slide with `data-gallery`, replace its img src with a
@@ -268,9 +274,11 @@ Must document: repo layout; generated-vs-hand-written regions + marker list;
 the "folder = gallery" rule; galleries.json semantics & ordering; day-to-day
 add/remove/rename recipes; how the Action works and debugging when it doesn't;
 local preview + rebuild commands; customization table (hero text, about, email
-in TWO places, Instagram, logo, colors, slideshow 20 s / 1600 ms); contact-form
-Formspree migration; custom domain (CNAME `etsareg.photos`); troubleshooting
-table; ~60 MB photos → push via git not web UI.
+in contact list + Web3Forms access_key location, Instagram, logo, colors,
+slideshow 20 s / 1600 ms); contact form via Web3Forms (key = public hidden
+field, how to change destination inbox); custom domain (CNAME
+`etsareg.photos`); troubleshooting table; ~160 MB total site → push via git
+not web UI.
 
 ## Acceptance checklist
 

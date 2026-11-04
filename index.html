@@ -463,7 +463,10 @@
             <a href="https://www.instagram.com/etsareg.photos" target="_blank" rel="noopener" aria-label="Instagram">Instagram · @etsareg.photos</a>
           </div>
         </div>
-        <form class="contact-form reveal" id="contactForm">
+        <form class="contact-form reveal" id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="0e54d6af-dec1-4b34-b4c0-fec78965e813">
+          <input type="hidden" name="subject" value="New enquiry from the website">
+          <input type="checkbox" name="botcheck" tabindex="-1" style="display: none">
           <label>
             Name
             <input type="text" name="name" required placeholder="Your name">
@@ -477,7 +480,7 @@
             <textarea name="message" rows="5" required placeholder="Tell me about your project…"></textarea>
           </label>
           <button type="submit" class="btn btn-primary">Send message</button>
-          <p class="form-note">This opens your email app with the message pre-filled. See README to use a form service instead.</p>
+          <p class="form-note" id="formNote">Your message is sent straight to my inbox.</p>
         </form>
       </div>
     </section>

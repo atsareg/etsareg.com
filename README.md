@@ -163,7 +163,7 @@ error if a marker is missing or no gallery folder was found, so a broken
 |------|-------|
 | Hero headline / kicker / button | `index.html`, `.hero-content` |
 | About text & services list | `index.html`, `#about` (photo: `images/me-2.JPG`, also `me-1.jpg`) |
-| Email address | `index.html` (mailto link) **and** `js/main.js` (`mailto:` in the form handler) |
+| Email address (visible) | `index.html` (mailto link in the contact list); submissions go to the inbox tied to the Web3Forms `access_key` in `index.html` |
 | Instagram link | `index.html`, `.socials` |
 | Footer / copyright | `index.html`, `.site-footer` |
 | Colors, fonts, spacing | CSS variables in `:root` of `css/style.css` |
@@ -182,16 +182,20 @@ error if a marker is missing or no gallery folder was found, so a broken
 
 ## 8. Contact form
 
-The form opens the visitor's email app pre-filled to `photos@etsareg.com`
-(subject "Photography inquiry — <name>"). No server needed, works on Pages.
-For real submissions, register at [Formspree](https://formspree.io) and change
-the form tag to:
+The form posts to [Web3Forms](https://web3forms.com), which forwards every
+submission to the inbox tied to the **access key** and keeps no dashboard copy.
+The key lives in a hidden field in `index.html`:
 
 ```html
-<form action="https://formspree.io/f/YOUR_ID" method="POST">
+<input type="hidden" name="access_key" value="0e54d6af-…">
 ```
 
-then delete the submit handler at the end of `js/main.js`.
+To change the destination inbox: generate a new key at web3forms.com with the
+new email and replace that value (the key is public by design — it can only
+deliver messages to your inbox, nothing else). A hidden `botcheck` checkbox
+serves as the spam honeypot; `js/main.js` submits via `fetch` and shows an
+inline confirmation in `#formNote`. Without JavaScript the plain POST still
+works (Web3Forms built-in success page).
 
 ## 9. Troubleshooting
 

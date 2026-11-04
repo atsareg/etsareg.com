@@ -139,14 +139,33 @@
     if (ev.key === "ArrowRight") step(1);
   });
 
-  /* ---------- Contact form (opens email client; see README for a form service) ---------- */
+  /* ---------- Contact form (Web3Forms → inbox; endpoint in index.html) ---------- */
   var form = document.getElementById("contactForm");
+  var formNote = document.getElementById("formNote");
   form.addEventListener("submit", function (ev) {
     ev.preventDefault();
+    var btn = form.querySelector("button[type=submit]");
+    btn.disabled = true;
     var data = new FormData(form);
-    var subject = encodeURIComponent("Photography inquiry — " + data.get("name"));
-    var body = encodeURIComponent(data.get("message") + "\n\n— " + data.get("name") + "\n" + data.get("email"));
-    window.location.href = "mailto:photos@etsareg.com?subject=" + subject + "&body=" + body;
+    fetch(form.action, {
+      method: "POST",
+      headers: { "Accept": "application/json" },
+      body: data
+    }).then(function (r) {
+      return r.json();
+    }).then(function (json) {
+      if (json.success) {
+        form.reset();
+        formNote.textContent = "Thank you! Your message has been sent.";
+        formNote.classList.add("sent");
+      } else {
+        formNote.textContent = "Sorry, something went wrong. Please email photos@etsareg.com directly.";
+      }
+      btn.disabled = false;
+    })["catch"](function () {
+      formNote.textContent = "Network problem — please try again or email photos@etsareg.com.";
+      btn.disabled = false;
+    });
   });
 
   /* ---------- Hero slideshow (one photo per gallery, slides left every 20s) ---------- */

@@ -406,6 +406,8 @@ section { padding-block: clamp(4.5rem, 10vw, 8rem); }
 .contact-form textarea:focus { outline: none; border-color: var(--accent); }
 .contact-form .btn { justify-self: start; }
 .form-note { font-size: .75rem; color: var(--muted); }
+.form-note.sent { color: var(--accent); }
+.contact-form .btn:disabled { opacity: .5; cursor: wait; }
 
 /* ---------- Footer ---------- */
 .site-footer {
