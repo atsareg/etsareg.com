@@ -35,8 +35,12 @@
   var groups = document.querySelectorAll(".gallery-group");
   filterBtns.forEach(function (btn) {
     btn.addEventListener("click", function () {
-      filterBtns.forEach(function (b) { b.classList.remove("is-active"); });
+      filterBtns.forEach(function (b) {
+        b.classList.remove("is-active");
+        b.setAttribute("aria-pressed", "false");
+      });
       btn.classList.add("is-active");
+      btn.setAttribute("aria-pressed", "true");
       var f = btn.dataset.filter;
       groups.forEach(function (g) {
         g.classList.toggle("hide", f !== "all" && g.dataset.group !== f);
@@ -82,6 +86,17 @@
     return name ? name.firstChild.textContent.trim() : "";
   }
 
+  function preloadNeighbours() {
+    var list = visibleItems();
+    if (list.length < 2) return;
+    var idxs = [(current - 1 + list.length) % list.length,
+                (current + 1) % list.length];
+    idxs.forEach(function (i) {
+      var im = new Image();
+      im.src = list[i].querySelector("img").src;
+    });
+  }
+
   function render() {
     var list = visibleItems();
     var item = list[current];
@@ -91,6 +106,7 @@
     lbImg.alt = img.alt;
     lbTitle.textContent = titleOf(item);
     lbCounter.textContent = (current + 1) + " / " + list.length;
+    preloadNeighbours();
   }
 
   function open(index) {
@@ -137,7 +153,42 @@
     if (ev.key === "Escape") close();
     if (ev.key === "ArrowLeft") step(-1);
     if (ev.key === "ArrowRight") step(1);
+    if (ev.key === "Tab") {
+      /* keep focus inside the dialog while it is open */
+      var focusables = lightbox.querySelectorAll("button");
+      var first = focusables[0];
+      var last = focusables[focusables.length - 1];
+      if (!lightbox.contains(document.activeElement)) {
+        ev.preventDefault();
+        first.focus();
+      } else if (ev.shiftKey && document.activeElement === first) {
+        ev.preventDefault();
+        last.focus();
+      } else if (!ev.shiftKey && document.activeElement === last) {
+        ev.preventDefault();
+        first.focus();
+      }
+    }
   });
+
+  /* swipe left/right navigates on touch devices */
+  var touchX = null;
+  var touchY = null;
+  lightbox.addEventListener("touchstart", function (ev) {
+    if (ev.touches.length !== 1) return;
+    touchX = ev.touches[0].clientX;
+    touchY = ev.touches[0].clientY;
+  }, { passive: true });
+  lightbox.addEventListener("touchend", function (ev) {
+    if (touchX === null) return;
+    var dx = ev.changedTouches[0].clientX - touchX;
+    var dy = ev.changedTouches[0].clientY - touchY;
+    touchX = null;
+    touchY = null;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+      step(dx < 0 ? 1 : -1);
+    }
+  }, { passive: true });
 
   /* ---------- Contact form (Web3Forms → inbox; endpoint in index.html) ---------- */
   var form = document.getElementById("contactForm");

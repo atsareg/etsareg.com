@@ -170,10 +170,13 @@ error if a marker is missing or no gallery folder was found, so a broken
 ### Behaviour worth knowing (`js/main.js`)
 
 - **Sticky header** gets a blur background after 40 px of scroll
+- **Skip link**: first Tab stop reveals "Skip to content" → jumps to `#main`
 - **Mobile nav**: hamburger toggles `#siteNav`
-- **Filters** show/hide whole `.gallery-group` blocks and mark items with `.hide`
-- **Lightbox**: click/Enter on a tile; ←/→ navigate within the *currently
-  filtered* set; Esc or backdrop click closes; focus returns to the tile
+- **Filters** show/hide whole `.gallery-group` blocks and mark items with
+  `.hide` (buttons carry `aria-pressed`)
+- **Lightbox**: click/Enter on a tile; ←/→ (or swipe on touch devices)
+  navigate within the *currently filtered* set, neighbours preloaded; Esc or
+  backdrop click closes; focus is trapped while open and returns to the tile
 - **Masonry**: pure CSS `columns` (4 / 3 / 2 on desktop/tablet/phone)
 - **Reveal**: tiles fade in on scroll (IntersectionObserver)
 

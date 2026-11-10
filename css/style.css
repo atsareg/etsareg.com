@@ -36,6 +36,24 @@ img { display: block; max-width: 100%; }
   margin-inline: auto;
 }
 
+/* ---------- Skip link ---------- */
+.skip-link {
+  position: fixed;
+  top: -100%;
+  left: 1rem;
+  z-index: 300;
+  background: var(--accent);
+  color: #14110a;
+  font-size: .8rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: .6rem 1.2rem;
+  transition: top .2s;
+}
+.skip-link:focus { top: .8rem; }
+#main:focus { outline: none; }
+
 /* ---------- Header ---------- */
 .site-header {
   position: fixed;

@@ -95,9 +95,10 @@ def hero_block(gals):
 
 
 def filters_block(gals):
-    lines = ['          <button class="filter-btn is-active" data-filter="all">All</button>']
-    lines += [f'          <button class="filter-btn" data-filter="{attr(g["category"])}">'
-              f'{esc(g["title"])}</button>' for g in gals]
+    lines = ['          <button class="filter-btn is-active" data-filter="all"'
+             ' aria-pressed="true">All</button>']
+    lines += [f'          <button class="filter-btn" data-filter="{attr(g["category"])}"'
+              f' aria-pressed="false">{esc(g["title"])}</button>' for g in gals]
     return "\n".join(lines)
 
 
