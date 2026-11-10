@@ -45,7 +45,6 @@ jobs:
           cp index.html galleries.json _site/
           cp -r css js images _site/
           cp .nojekyll _site/
-          cp -r legacy _site/legacy
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

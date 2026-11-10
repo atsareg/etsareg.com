@@ -7,8 +7,7 @@ photos are pushed.
 
 Sections: hero slideshow, about, filterable galleries (masonry) with lightbox,
 contact form. The previous version of the site (Colorlib template) is preserved
-in the repo under `legacy/`, published at `/legacy/`, on the `legacy` branch
-and the `old-site-2026-11-04` tag.
+in git history only — on the `legacy` branch and the `old-site-2026-11-04` tag.
 
 ---
 
@@ -23,13 +22,12 @@ and the `old-site-2026-11-04` tag.
 ├── js/main.js                 all interactions (nav, filter, lightbox, hero)
 ├── scripts/build.py           generates galleries into index.html markers
 ├── .github/workflows/build.yml  GitHub Action: push → rebuild → publish Pages
-├── images/
-│   ├── logo_wb_app.png        header logo (white text)
-│   ├── favicon.png            site favicon (from the old site)
-│   ├── me-1.jpg / me-2.JPG    portraits of Kate (About section)
-│   └── <gallery folders>/     one folder = one gallery
-│       portrait/  creative/  events/  street/  travel/
-└── legacy/                    archived previous site (served at /legacy/)
+└── images/
+    ├── logo_wb_app.png        header logo (white text)
+    ├── favicon.png            site favicon (from the old site)
+    ├── me-1.jpg / me-2.JPG    portraits of Kate (About section)
+    └── <gallery folders>/     one folder = one gallery
+        portrait/  creative/  events/  street/  travel/
 ```
 
 ## 2. How the site is put together
@@ -104,8 +102,7 @@ dispatch (**Actions → Rebuild galleries & deploy → Run workflow**). It:
    `"Update galleries from images/ [skip ci]"` back to the repo (the
    `[skip ci]` tag prevents an infinite loop);
 2. assembles `_site/` (index.html, css/, js/, images/, galleries.json,
-   .nojekyll, plus the archived site as `legacy/`) and **uploads it as the
-   GitHub Pages artifact** — so the old site stays live at `/legacy/`;
+   .nojekyll) and **uploads it as the GitHub Pages artifact**;
 3. the `deploy` job publishes it with `actions/deploy-pages@v4` — the run
    summary shows the live URL.
 
@@ -210,11 +207,9 @@ works (Web3Forms built-in success page).
 
 ## 10. Rolling back to the old version of the site
 
-The previous site (Colorlib template, published from `docs/`) is kept in three
-independent places, so switching back is always possible:
+The previous site (Colorlib template, published from `docs/`) is kept in git
+history, so switching back is always possible:
 
-- **While the new site runs**, the old one is still browsable live at
-  `https://<site-url>/legacy/` (it is shipped inside the Pages artifact).
 - **Restore the old site as `/`**:
   ```bash
   git log --oneline        # find SHA of the replacement commit
