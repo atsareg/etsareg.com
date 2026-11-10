@@ -40,16 +40,23 @@ def attr(s):
 
 
 def load_cfg():
-    if CFG.exists():
-        return json.loads(CFG.read_text(encoding="utf-8"))
-    return {}
+    if not CFG.exists():
+        return {}
+    try:
+        cfg = json.loads(CFG.read_text(encoding="utf-8"))
+    except (ValueError, OSError) as e:
+        sys.exit(f"ERROR: cannot read {CFG.name}: {e}")
+    if not isinstance(cfg, dict):
+        sys.exit(f"ERROR: {CFG.name} must contain a JSON object")
+    return cfg
 
 
 def scan():
     if not IMG.is_dir():
         sys.exit(f"ERROR: {IMG} not found")
     cfg = load_cfg()
-    present = sorted(d.name for d in IMG.iterdir() if d.is_dir())
+    present = sorted(d.name for d in IMG.iterdir()
+                     if d.is_dir() and not d.name.startswith("."))
     names = [n for n in cfg if n in present] + [n for n in present if n not in cfg]
     galleries = []
     for name in names:
@@ -65,8 +72,8 @@ def scan():
         meta = cfg.get(name, {})
         galleries.append({
             "category": name,
-            "title": meta.get("title", name.capitalize()),
-            "sub": meta.get("sub", ""),
+            "title": meta.get("title") or name.capitalize(),
+            "sub": meta.get("sub") or "",
             "photos": [f.relative_to(ROOT).as_posix() for f in photos],
         })
     return galleries
@@ -133,6 +140,8 @@ def main():
     gals = scan()
     if not gals:
         sys.exit("ERROR: no gallery folders with photos found in images/")
+    if not INDEX.is_file():
+        sys.exit(f"ERROR: {INDEX} not found")
     html = INDEX.read_text(encoding="utf-8")
     out = replace_block(html, "HERO-SLIDES", hero_block(gals))
     out = replace_block(out, "FILTERS", filters_block(gals))

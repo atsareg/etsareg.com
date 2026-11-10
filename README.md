@@ -167,7 +167,7 @@ error if a marker is missing or no gallery folder was found, so a broken
 | Instagram link | `index.html`, `.socials` |
 | Footer / copyright | `index.html`, `.site-footer` |
 | Colors, fonts, spacing | CSS variables in `:root` of `css/style.css` |
-| Slideshow speed | interval in `js/main.js` (Hero slideshow block, currently 20 s) |
+| Slideshow speed | interval in `js/main.js` (Hero slideshow block, currently 10 s) |
 | Slide animation feel | `dur` (1600 ms) + easing in `goTo()` |
 
 ### Behaviour worth knowing (`js/main.js`)

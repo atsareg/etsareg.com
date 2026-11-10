@@ -119,7 +119,7 @@
       open(visibleItems().indexOf(item));
     });
     item.addEventListener("keydown", function (ev) {
-      if (ev.key === "Enter" || ev.key === " ") {
+      if (ev.key === "Enter" || ev.key === " " || ev.key === "Spacebar") {
         ev.preventDefault();
         open(visibleItems().indexOf(item));
       }
@@ -146,6 +146,8 @@
     ev.preventDefault();
     var btn = form.querySelector("button[type=submit]");
     btn.disabled = true;
+    formNote.classList.remove("sent");
+    formNote.textContent = "Sending…";
     var data = new FormData(form);
     fetch(form.action, {
       method: "POST",
@@ -168,7 +170,7 @@
     });
   });
 
-  /* ---------- Hero slideshow (one photo per gallery, slides left every 20s) ---------- */
+  /* ---------- Hero slideshow (one photo per gallery, slides left every 10s) ---------- */
   var strip = document.querySelector(".hero-slides");
   var slides = document.querySelectorAll(".hero-slide");
   var slideName = document.getElementById("slideName");
@@ -228,6 +230,6 @@
         if (next === last) { slide = 0; setPos(0); }
         else { slide = next; }
       });
-    }, 20000);
+    }, 10000);
   }
 })();

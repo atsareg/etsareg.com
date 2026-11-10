@@ -315,6 +315,10 @@ section { padding-block: clamp(4.5rem, 10vw, 8rem); }
   margin-bottom: 1.2rem;
 }
 .gallery-item.hide { display: none; }
+.gallery-item:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
 .gallery-item img {
   width: 100%;
   height: auto;
